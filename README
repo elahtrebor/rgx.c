@@ -1,0 +1,37 @@
+<pre>
+rgx.c - My experiment in developing a simple regular expression parser.
+
+Understands basic regular expressions ^ .  *  + $  Ranges and clauses: [A-Z] [a-z] [0-9] [\s] [\S],  etc
+Much of this was based on reading Brian Kernighans book on Software Tools in Pascal.
+Some of the code is derived from dissecting the original DEC grep.c source.
+
+To use compile using: 
+gcc rgx.c -o rgx
+
+./rgx
+Incorrect Arguments. Please use match <regex> <string>
+
+./rgx "test" "this is a test" 
+match: 1
+ENCODED: CHAR t CHAR e CHAR s CHAR t 
+
+
+ ./rgx "[a-z]+" "some string data"
+match: 1
+ENCODED: PLUS CLASS a z ENDPAT 
+
+
+./rgx "[0-9]+" "some string data"
+match: 0
+ENCODED: PLUS CLASS 0 9 ENDPAT 
+
+./rgx "[0-9]+" "some string 123 data"
+match: 1
+ENCODED: PLUS CLASS 0 9 ENDPAT 
+
+
+./rgx "[\S]+" "some STRING 123 data"
+match: 1
+ENCODED: PLUS CLASS BACKSLASH S ENDPAT 
+
+
