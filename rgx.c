@@ -34,7 +34,7 @@ return;
 
 void swapop(int c){
  memset(patbuf, 0, sizeof patbuf);
- epat--;
+ epat--;                              
   while(*epat > 13){ epat--;}         /* rewind the pattern */
   if(*epat==BACKSLASH)epat--;
   pbuf = patbuf;                      /* Copy the pattern into the buffer */
@@ -143,7 +143,7 @@ char *pmatch(char *s, char *p){
        p++;
        l = p; /* make a copy of the pattern */
        if ((cmatch(s, l)) == 0 && *p != STAR)return 0;
-        else s++;                                 
+        else s++;                                     /* This section based on DEC's code */
          are = s;                                     /* Remember line start */
          while (*s && cmatch(s, l))s++;               /* Get longest match   */
          while (*p++ != ENDPAT && *p!= END);                      /* Skip over pattern   */
